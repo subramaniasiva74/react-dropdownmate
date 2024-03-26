@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Dropdown } from './Dropdown';
 
 function App() {
+  const [country, setCountry] = useState("");
+  const [language, setLanguage] = useState("");
+
+  const handleChange = (e) => {
+    if (e.target.name === "Country") {
+      setCountry(e.target.value);
+    } else if (e.target.name === "Language") {
+      setLanguage(e.target.value);
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Dropdown options={["India", "USA", "Japan", "China"]} onChange={handleChange} labelText="Country"/>
+      </div>
+      <div>
+        <Dropdown options={["English", "Tamil", "French", "Chinese"]} onChange={handleChange} labelText="Language"/>
+      </div>
+      <div>
+        <label htmlFor="">Selected Country: {country}</label>
+      </div>
+      <div>
+        <label htmlFor="">Selected Language: {language}</label>
+      </div>
     </div>
   );
 }
